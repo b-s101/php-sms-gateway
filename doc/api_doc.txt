@@ -1,0 +1,24 @@
+API Documentation - How to use
+
+A SMS can be send by accessing this URL (example):
+http://smsgw1/api/api.php?user=testuser&pw=testpassword&text=My message text&dest=1234567
+
+user: Username
+The user needed to authenticate at the SMS gateway
+
+pw: Password
+Password for authentication at the SMS gateway
+
+text: Message body
+Whitespaces and special characters might be used
+These special characters are NOT supported currently: ä, ü, ö, &
+
+dest: Destination phone number
+No whitespaces, no leading '+', no dashes, no nothing but numbers
+For international numbers add the country code with leading 00
+Multiple receipients must be seperated by a comma (',')
+
+SMS containing more than 160 characters will be cut into chunks of max. 153 characters each automatically.
+
+'authentication failed' will be returned in case of wrong authentication credentials.
+THERE ARE NO RETURN VALUES ON SUCCESSFUL/UNSUCCESSFUL SUBMITTING A SMS CURRENTLY.

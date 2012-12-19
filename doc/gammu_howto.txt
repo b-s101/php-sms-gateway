@@ -1,0 +1,45 @@
+1. Requirements for the Gateway
+
+- Linux host (actual distribution, Kernel 3.0 or greater recommended)
+- a compatible GSM phone/USB modem (compatibility chart: http://wammu.eu/phones/) directly connected to the Linux host
+- gammu (set of commandline utilities to send SMS)
+- gammu-smsd (daemon for sending SMS)
+- MySQL Server (for gammu-smsd)
+
+
+2. Installation/Configuration GAMMU
+
+- install gammu (ie: 'sudo apt-get install gammu')
+- run 'sudo gammu-config'
+	- configure the device (ie. /dev/ttyHS0) and connection (ie. at192000), optional logging
+	- copy the resulting file ($HOME/.gammurc) to /etc/gammurc
+- testdrive gammu: 'echo "Test SMS" | sudo gammu --sendsms TEXT [target mobile number, ie: 123456789] -validity 6HOURS'
+
+
+3. Installation/Configuration MySQL-Database
+
+- install mysql-server (ie: 'sudo apt-get install mysql-server')
+- optional: install phpmyadmin (requires Apache2/LightHTTPd with PHP5; ie: 'sudo apt-get install phpmyadmin')
+- create a database for gammu-smsd (ie: named smsd)
+- create a user for the database with the following rights on the created database: select, insert, update, delete
+- create tables within the database according to/using the file 'create_smsd_db.txt'
+
+
+4. Installation/Configuration GAMMU-SMSD
+
+- install gammu-smsd (ie: 'sudo apt-get install gammu-smsd')
+- modify the gammu-smsd configuration file in /etc/gammu-smsdrc according to 'create_smsd_config.txt'
+	- MODIFY TO FIT WITH YOUR ENVIRONMENT!
+	- rename /etc/gammurc to /etc/gammurc.org
+	- start gammu-smsd (ie: 'sudo service gammu-smsd start')
+	- testdrive gammu-smsd: 'echo "Greetings from gammu-smsd" | sudo gammu-smsd-inject TEXT [target mobile number, ie: 123456789]'
+	- if sending fails check the logfile/syslog
+	
+5. Optional: Installation/Configuration Apache2
+
+- required for getting the web API up and running
+- install apache2 (ie: 'sudo apt-get install apache2')
+- install php5 (ie: 'sudo apt-get install php5')
+- copy 'api.php' and 'sms_inject.php' to the webserver's directory (ie: /var/www)
+- adjust security settings, virtual hosts, etc. to your requirements
+- test the API

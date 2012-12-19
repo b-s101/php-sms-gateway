@@ -1,0 +1,22 @@
+# Configuration file for Gammu SMS Daemon
+# Gammu library configuration, see gammurc(5)
+[gammu]
+port = /dev/ttyHS0
+model = at
+connection = at19200
+synchronizetime = yes
+logfile = /var/log/gammu.log
+logformat = errorsdate
+use_locking = yes
+#gammuloc =
+
+# SMSD configuration, see gammu-smsdrc(5)
+[smsd]
+Service = sql
+Driver = native_mysql
+PIN =     
+LogFile = syslog
+User = smsd
+Password = password
+PC = localhost
+Database = smsd
