@@ -3,7 +3,8 @@
  * sms_inject
  * 
  * @package   gammu smsd class
- * @author    ikhsan agustian <ikhsan017@gmail.com>
+ * @original author    ikhsan agustian <ikhsan017@gmail.com>
+ * @modified by Bastian Schulte <b_schulte@me.com>
  * @license   Distributed under GNU/GPL
  * @version   0.1
  * @access    public
