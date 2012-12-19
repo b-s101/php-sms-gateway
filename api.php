@@ -1,4 +1,9 @@
 <?php
+//Change the following four entries according to your environment
+$mysql_srv='localhost'
+$mysql_db='smsd'
+$mysql_user='smsd-usr'
+$mysql_pass='smsd_usr_pass'
 
 if ((!isset($_GET['user'])) || (!isset($_GET['pw'])) || (!isset($_GET['text'])) || (!isset($_GET['dest']))) {
 	header("Refresh: 3; URL=http://somewhere");
@@ -10,7 +15,7 @@ $_SERVER['PHP_AUTH_USER']=$_GET['user'];
 $_SERVER['PHP_AUTH_PW']=$_GET['pw'];
 
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
-    header('WWW-Authenticate: Basic realm="SMS Gateway"');
+    header('WWW-Authenticate: Basic realm="PHP-SMS-Gateway"');
     header('HTTP/1.0 401 Unauthorized');
     echo 'Authentication Required by SMS API';
     exit;
@@ -23,8 +28,8 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 //			echo $_SERVER['PHP_AUTH_USER'] . '<br>';
 //			echo $_SERVER['PHP_AUTH_PW'] . '<br>';
 			$user=$_GET['user'];
-			$res=mysql_connect('localhost','YOUR_SMS_DB_USER','YOUR_SMS_DB_PASSWORD');
-			mysql_select_db('smsd',$res);
+			$res=mysql_connect($mysql_srv,$mysql_user,$mysql_pass);
+			mysql_select_db($mysql_db,$res);
 
 			$sms=new sms_inject($res);
 				$msg=htmlspecialchars($_GET['text']);
