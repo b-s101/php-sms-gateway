@@ -1,7 +1,8 @@
 php-sms-gateway
 ===============
 
-The webservice part of a SMS gateway based on gammu.
+This SMS gateway is the webservice part of a SMS gateway based on gammu. It provides an
+API which enables authenticated users sending SMS via executing one URL.
 
 There are several documentation in the 'doc' folder. Documentation is not finished yet
 but I'm on a good way.
